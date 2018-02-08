@@ -12,6 +12,11 @@ export class ProfileCard extends React.Component {
   toggleFunction = () => {
     this.setState({ toggleClass: !this.state.toggleClass })
   }
+
+  showSkill = this.props.dinosaur.skills.map((skill, index) => {
+    return <li key={index}> {skill} </li>
+  })
+
   render() {
     return (
       <li className="profile-card">
@@ -22,9 +27,7 @@ export class ProfileCard extends React.Component {
 
         <section className={this.state.toggleClass ? 'skills-container hidden' : 'skill-container'}>
           <h4>Skills</h4>
-          <ul className="skill-list">
-            <li>{this.props.dinosaur.skills}</li>
-          </ul>
+          <ul className="skill-list">{this.showSkill}</ul>
         </section>
       </li>
     )
