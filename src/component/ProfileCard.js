@@ -14,7 +14,7 @@ export class ProfileCard extends React.Component {
   }
 
   showSkills = this.props.dinosaur.skills.map((skills, index) => {
-    return <li key={index}> {skills} </li>
+    return <li key={index}>{skills}</li>
   })
 
   render() {
