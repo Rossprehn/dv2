@@ -1,36 +1,30 @@
 import React, { Component } from 'react'
 import './App.css'
-import Header from './component/Header'
-import Footer from './component/Footer'
-import ProfilesList from './component/Profiles.js'
+import { Header } from 'Components/Header'
+import Profiles from 'Components/Profiles'
+import { Footer } from 'Components/Footer'
 
 class App extends Component {
-  state = { dinosaurs: [] }
-
   constructor(props) {
     super(props)
-    this.state = { dinosaurs: [] }
+    this.state = {
+      data: []
+    }
   }
-
   componentDidMount() {
-    this.getDinosaurs()
+    fetch('./dinosaurs.json')
+      .then(response => response.json())
+      .then(response => {
+        this.setState({ data: response })
+      })
+      .catch(error => {})
   }
 
-  getDinosaurs = () => {
-    return fetch('./dinosaurs.json')
-      .then(response => response.json())
-      .then(dinosaurs => this.setState({ dinosaurs }))
-  }
   render() {
     return (
-      <div>
+      <div className="App">
         <Header />
-        <main>
-          <h2>Profiles</h2>
-          <ul id="profiles">
-            <ProfilesList dinosaurs={this.state.dinosaurs} />
-          </ul>
-        </main>
+        <Profiles dinosaurs={this.state.data} />
         <Footer />
       </div>
     )
